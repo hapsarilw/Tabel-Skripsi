@@ -1,0 +1,82 @@
+.imgLogo{
+  width: 5%;
+  padding-right: 5mm;
+}
+.table{
+  padding: 10mm;
+}
+#total{
+  text-align: right;
+}
+#tabelN, .dataKeempat, h6,{
+  width: 80%;
+  margin: 0 auto ;
+  padding: 2em;
+}
+.dataPertama, .dataKeempat,#headline{
+  padding: 0.5em;
+  text-align: center;
+}
+.p{
+  text-align: left;
+}
+#namaPenguji{
+  width: 30%;
+}
+#isi{
+  width: 70%;
+}
+#ttd{
+  width: 100px;
+  height: 100px;
+}
+.row {
+  justify-content:center;
+}
+#total{
+  text-align: right;
+}
+#tabelN, h6, #tabelDataMahasiswa, #tabelNA, #tabelNB{
+  width: 100%;
+  margin: 0 auto !important;
+}
+#dataPertama{
+  padding: 0.5em;
+  text-align: center;
+}
+#dataKedua{
+  padding-left: 5em;
+  padding-right: 5em;
+  text-align: center
+}
+#black{
+  background-color: grey;
+}
+#tabelDataMahasiswa > td{
+  width: 70% !important;
+  margin: 0 auto !important;
+  padding: 2em !important;
+  text-align: left !important;
+}
+#small{
+  width: 10%;
+}
+#large{
+  width: 40%;
+
+}
+#tabelN > #large2{
+  height: 80% !important;
+}
+#tabelNA{
+  float: left;
+  width: 70%;
+}
+#tabelNB{
+  float: right;
+  width: 30%;
+  text-align: left;
+}
+
+
+

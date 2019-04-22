@@ -1,0 +1,434 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <!--<img src="../assets/Logo_UNPAR.png" class="imgLogo" alt="">-->
+  <a class="navbar-brand" href="#">Tabel Skripsi</a>
+</nav>
+<div class="tabelSkripsi">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#dataMhs">Data MahasiswaModel</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#rekap">Rekapitulasi Pembimbing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#ketua">Rekapitulasi Ketua</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#anggota">Rekapitulasi Anggota</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#berita">Berita Acara</a>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active show" id="dataMhs">
+        <div class="jumbotron align-content-lg-center">
+          <div class="col-sm-12 form-group row">
+            <label class="col-sm-2">NPM</label>
+            <input [(ngModel)]="mahasiswa.npm" class="col-sm-5 form-control form-control-sm" type="text"  placeholder="Nomor Pokok Mahasiswa" >
+          </div>
+          <div class="col-sm-12 form-group row">
+            <label class="col-sm-2">Nama</label>
+            <input [(ngModel)]="mahasiswa.nama" class="col-sm-5 form-control form-control-sm" type="text" placeholder="Nama Mahasiswa" id="nama">
+          </div>
+          <div class="col-sm-12 form-group row">
+            <label class="col-sm-2">Judul</label>
+            <input [(ngModel)]="mahasiswa.judul"class="col-sm-5 form-control form-control-sm" type="text" placeholder="Judul" name="judul" />
+          </div>
+          <div class="col-sm-12 form-group row">
+            <label class="col-sm-2">Tgl</label>
+            <input  type="date" [(ngModel)]="mahasiswa.tgl" placeholder="Tanggal Sidang" class="col-sm-5 form-control form-control-sm"  name="tgl" ngDefaultControl />
+            {{ mahasiswa.getTgl(mahasiswa.tgl | slice:8:10,mahasiswa.tgl | slice:5:7,mahasiswa.tgl | slice:0:4) }}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade " id="rekap">
+          <div>
+          <div id="dataPertama">
+            <h2> <strong>Rekapitulasi Penilaian SKRIPSI 2 (PEMBIMBING)</strong> </h2>
+            <h4> NPM : {{ mahasiswa.npm }}</h4>
+          </div>
+          <div id="dataKedua">
+            <table id="tabelNA" class="table table-hover table-bordered col-sm-8 align-middle">
+              <thead>
+              <tr class="table-dark">
+                <th>Komponen Penilaian</th>
+                <th>Nilai Sidang </th>
+                <th>Penilaian Tahapan* </th>
+                <th>Rata-Rata</th>
+                <th>Bobot</th>
+                <th>Nilai Akhir</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row">Tata Tulis Laporan </th>
+                <td ><input type="number" [(ngModel)]="tabel1.NS1"></td>
+                <td id="black"></td>
+                <td >{{ tabel1.saveRata(tabel1.NS1,0,'1') }}</td>
+                <td>15%</td>
+                <td >{{ tabel1.saveNA(tabel1.R1,'1',0.15) }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Kelengkapan Materi </th>
+                <td><input type="number"  [(ngModel)]="tabel1.NS2"></td>
+                <td><input type="number" [(ngModel)]="tabel1.PT2"></td>
+                <td>{{ tabel1.saveRata(tabel1.NS2, tabel1.PT2, '2') }}</td>
+                <td>15%</td>
+                <td>{{ tabel1.saveNA(tabel1.R2,'2',0.15) }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Poster </th>
+                <td><input type="number"  [(ngModel)]="tabel1.NS3"></td>
+                <td id="black"></td>
+                <td>{{ tabel1.saveRata(tabel1.NS3, 0, '3') }}</td>
+                <td>10%</td>
+                <td>{{ tabel1.saveNA(tabel1.R3,'3',0.1) }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Penguasaan Materi </th>
+                <td><input type="number" [(ngModel)]="tabel1.NS4"></td>
+                <td><input type="number" [(ngModel)]="tabel1.PT4"></td>
+                <td>{{ tabel1.saveRata(tabel1.NS4,tabel1.PT4,'4') }}</td>
+                <td>30%</td>
+                <td>{{ tabel1.saveNA(tabel1.R4,'4', 0.3) }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Tata Tulis Laporan </th>
+                <td><input type="number" [(ngModel)]="tabel1.NS5"></td>
+                <td><input type="number" [(ngModel)]="tabel1.PT5"></td>
+                <td>{{ tabel1.saveRata(tabel1.NS5,tabel1.PT5,'5') }}</td>
+                <td>30%</td>
+                <td>{{ tabel1.saveNA(tabel1.R5,'5', 0.3) }}</td>
+              </tr>
+              <tr>
+                <th scope="row" colspan="5" id="total">Total </th>
+                <td>{{ tabel1.getTotalA() }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <table id="tabelNB" class="table table-hover table-bordered col-sm-8 align-middle">
+              <tbody>
+              <tr>
+                <th scope="row">Tgl: </th>
+                <th>{{ mahasiswa.tglIndo }}</th>
+              </tr>
+              <tr>
+                <td colspan="2" height="250"scope="row">Ttd: </td>
+              </tr>
+              <tr>
+                <td colspan="2" scope="row">Nama: </td>
+
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="ketua">
+        <div id="dataPertama">
+          <h2> <strong>Rekapitulasi Penilaian SKRIPSI 2 (KETUA)</strong> </h2>
+          <h4> NPM : {{ mahasiswa.npm }}</h4>
+        </div>
+        <div id="dataKedua">
+          <table id="tabelNA" class="table table-hover table-bordered col-sm-8 align-middle">
+            <thead>
+            <tr class="table-dark">
+              <th>Komponen Penilaian</th>
+              <th>Nilai</th>
+              <th>Bobot</th>
+              <th>Nilai Akhir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Tata Tulis Laporan </th>
+              <td><input type="number" [(ngModel)]="tabel2.NS1"></td>
+              <td>10%</td>
+              <td>{{ tabel2.saveNA(tabel2.NS1,'1', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Kelengkapan Materi </th>
+              <td><input type="number" [(ngModel)]="tabel2.NS2"></td>
+              <td>10%</td>
+              <td>{{ tabel2.saveNA(tabel2.NS2,'2', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Poster </th>
+              <td><input type="number" [(ngModel)]="tabel2.NS3"></td>
+              <td>10%</td>
+              <td>{{ tabel2.saveNA(tabel2.NS3,'3', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Penguasaan Materi </th>
+              <td><input type="number" [(ngModel)]="tabel2.NS4"></td>
+              <td>30%</td>
+              <td>{{ tabel2.saveNA(tabel2.NS4,'4', 0.3) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Presentasi </th>
+              <td><input type="number" [(ngModel)]="tabel2.NS5"></td>
+              <td>10%</td>
+              <td>{{ tabel2.saveNA(tabel2.NS5,'5', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Pencapaian Tujuan </th>
+              <td><input type="number" [(ngModel)]="tabel2.NS6"></td>
+              <td>10%</td>
+              <td>{{ tabel2.saveNA(tabel2.NS6,'6', 0.3) }}</td>
+            </tr>
+            <tr>
+              <th scope="row" colspan="3" id="total">Total </th>
+              <td>{{ tabel2.getTotalB() }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table id="tabelNB" class="table table-hover table-bordered col-sm-8 align-middle">
+            <tbody>
+            <tr>
+              <th scope="row">Tgl: </th>
+              <th>{{ mahasiswa.tglIndo }}</th>
+            </tr>
+            <tr>
+              <td colspan="2" height="250"scope="row">Ttd: </td>
+            </tr>
+            <tr>
+              <td colspan="2" scope="row">Nama: </td>
+
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="anggota">
+        <div id="dataPertama">
+          <h2> <strong>Rekapitulasi Penilaian SKRIPSI 2 (ANGGOTA)</strong> </h2>
+          <h4> NPM : {{ mahasiswa.npm }}</h4>
+        </div>
+        <div id="dataKedua">
+          <table id="tabelNA" class="table table-hover table-bordered col-sm-8 align-middle">
+            <thead>
+            <tr class="table-dark">
+              <th>Komponen Penilaian</th>
+              <th>Nilai</th>
+              <th>Bobot</th>
+              <th>Nilai Akhir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Tata Tulis Laporan </th>
+              <td><input type="number" [(ngModel)]="tabel3.NS1"></td>
+              <td>10%</td>
+              <td>{{ tabel3.saveNA(tabel3.NS1,'1', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Kelengkapan Materi </th>
+              <td><input type="number" [(ngModel)]="tabel3.NS2"></td>
+              <td>10%</td>
+              <td>{{ tabel3.saveNA(tabel3.NS2,'2', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Poster </th>
+              <td><input type="number" [(ngModel)]="tabel3.NS3"></td>
+              <td>10%</td>
+              <td>{{ tabel3.saveNA(tabel3.NS3,'3', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Penguasaan Materi </th>
+              <td><input type="number" [(ngModel)]="tabel3.NS4"></td>
+              <td>30%</td>
+              <td>{{ tabel3.saveNA(tabel3.NS4,'4', 0.3) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Presentasi </th>
+              <td><input type="number" [(ngModel)]="tabel3.NS5"></td>
+              <td>10%</td>
+              <td>{{ tabel3.saveNA(tabel3.NS5,'5', 0.1) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Pencapaian Tujuan </th>
+              <td><input type="number" [(ngModel)]="tabel3.NS6"></td>
+              <td>10%</td>
+              <td>{{ tabel3.saveNA(tabel3.NS6,'6', 0.3) }}</td>
+            </tr>
+            <tr>
+              <th scope="row" colspan="3" id="total">Total </th>
+              <td>{{ tabel3.getTotalB() }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table id="tabelNB" class="table table-hover table-bordered col-sm-8 align-middle">
+            <tbody>
+            <tr>
+              <th scope="row">Tgl: </th>
+              <th>{{ mahasiswa.tglIndo }}</th>
+            </tr>
+            <tr>
+              <td colspan="2" height="250"scope="row">Ttd: </td>
+            </tr>
+            <tr>
+              <td colspan="2" scope="row">Nama: </td>
+
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="berita">
+        <div id="headline">
+          <h2> <strong>Berita Acara Sidang Skripsi</strong> </h2>
+          <h4><strong>Semester: Ganjil/Genap* {{ mahasiswa.tahunAkademik }}</strong></h4>
+        </div>
+        <div class="dataPertama">
+          <div class="align-content-lg-center">
+            <table id="tabelDataMahasiswa" class="table table-borderless col-sm-8 align-middle">
+              <tbody>
+              <tr>
+                <th colspan="4" scope="row" class="text-left">Telah diselenggarakan Sidang Skripsi untuk mata kuliah AIF184002-05 Skripsi 2 bagi: </th>
+              </tr>
+              <tr>
+                <th id="small" scope="row">NPM: </th>
+                <td id="large">{{ mahasiswa.npm }}</td>
+                <th id="small">Nama:</th>
+                <td id="large">{{ mahasiswa.nama }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Judul: </th>
+                <td colspan="3">{{ mahasiswa.judul }}</td>
+
+              </tr>
+              <tr>
+                <th colspan="4" scope="row" class="text-left">dengan pembimbing dan penguji : </th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="dataKedua">
+          <div class="align-content-lg-center">
+            <table id="tabelN" class="table table-borderless col-sm-8 align-middle">
+              <tbody>
+              <tr>
+                <th id="namaPenguji" scope="row">Pembimbing Utama/Tunggal* </th>
+                <td id="isi" colspan="3">
+                  <div class="form-group">
+                    <select class="custom-select">
+                      <option selected="">-- Pembimbing Utama --</option>
+                      <option *ngFor="let dosen of listTunggal">{{dosen.name}}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th id="namaPenguji" scope="row">Pembimbing Pendamping </th>
+                <td id="isi" colspan="3">
+                  <div class="form-group">
+                    <select class="custom-select">
+                      <option selected="">-- Pembimbing Pendamping --</option>
+                      <option *ngFor="let dosen of listPendamping">{{dosen.name}}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th id="namaPenguji" scope="row">Ketua Tim Penguji :  </th>
+                <td id="isi" colspan="3">
+                  <div class="form-group">
+                    <select class="custom-select">
+                      <option selected="">-- Pembimbing Ketua --</option>
+                      <option *ngFor="let dosen of listKetua">{{dosen.name}}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Anggota Tim Penguji  </th>
+                <td id="isi" colspan="3">
+                  <div class="form-group">
+                    <select class="custom-select">
+                      <option selected="">-- Pembimbing Anggota --</option>
+                      <option *ngFor="let dosen of listAnggota">{{dosen.name}}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="dataKetiga">
+          <table id="tabelN" class="table table-hover table-bordered col-sm-8 align-middle">
+            <thead>
+            <tr class="table-dark">
+              <th>No</th>
+              <th>Pembimbing/Penguji </th>
+              <th>Nilai </th>
+              <th>Bobot</th>
+              <th>Nilai Akhir </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Ketua Tim Penguji </td>
+              <td>{{tabel1.getTotalA()}}</td>
+              <td>35%</td>
+              <td>{{tabel4.saveNA(tabel1.getTotalA(),'1',0.35)}}</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Anggota Tim Penguji  </td>
+              <td>{{tabel2.getTotalB()}}</td>
+              <td>35%</td>
+              <td>{{tabel4.saveNA(tabel2.getTotalB(),'2',0.35)}}</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Pembimbing  </td>
+              <td>{{tabel3.getTotalB()}}</td>
+              <td>20%</td>
+              <td>{{tabel4.saveNA(tabel3.getTotalB(),'3',0.2)}}</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Koordinator Skripsi  </td>
+              <td><input type="number"  [(ngModel)]="tabel4.NS4"></td>
+              <td>10%</td>
+              <td>{{tabel4.saveNA(tabel4.NS4,'4',0.1)}}</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td>Total </td>
+              <td></td>
+              <td>100%</td>
+              <td>{{tabel4.getTotalC()}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dataKeempat">
+          <p><strong>Ditetapkan di Bandung, <input type="date" [(ngModel)]="mahasiswa.tgl" placeholder="tgl"/></strong></p>
+          <table class="table table-hover table-bordered">
+            <tr>
+              <td id="ttd"></td>
+              <td id="ttd"></td>
+              <td id="ttd"></td>
+              <td id="ttd"></td>
+            </tr>
+            <tr>
+              <th>Ketua Tim Penguji </th>
+              <th>Anggota Tim Penguji </th>
+              <th>Pembimbing** </th>
+              <th>Koordinator Skripsi </th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+
